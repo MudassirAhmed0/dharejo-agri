@@ -30,11 +30,12 @@ export function Navigation() {
             <motion.div
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
+              className="bg-white p-2 rounded-lg shadow-sm"
             >
               <img 
                 src={logo} 
                 alt="Dharejo Agri & Cattle Farms" 
-                className="h-16 w-auto md:h-20"
+                className="h-12 w-auto md:h-16"
               />
             </motion.div>
           </Link>
