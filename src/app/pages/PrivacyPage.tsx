@@ -9,7 +9,7 @@ export function PrivacyPage() {
     },
     {
       title: '2. Information We Collect',
-      content: 'We may collect personal information that you provide directly to us, including but not limited to: name, email address, phone number, business information, shipping addresses, and payment information. We also collect information automatically through your use of our website, such as IP addresses, browser type, pages visited, and time spent on pages.'
+      content: 'We may collect personal information that you provide directly to us, including but not limited to: name, email address, business information, shipping addresses, and payment information. We also collect information automatically through your use of our website, such as IP addresses, browser type, pages visited, and time spent on pages.'
     },
     {
       title: '3. How We Use Your Information',
@@ -53,7 +53,7 @@ export function PrivacyPage() {
     },
     {
       title: '13. Contact Us',
-      content: 'If you have questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us at: Email: info@dharejoagri.com, Phone: +92 XXX XXXXXXX, Address: Sakrand, Sindh, Pakistan. We will respond to your inquiry as promptly as possible.'
+      content: 'If you have questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us at: Email: dharejoagri@gmail.com, Address: Sakrand, Sindh, Pakistan. We will respond to your inquiry as promptly as possible.'
     },
     {
       title: '14. Compliance',

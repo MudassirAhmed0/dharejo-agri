@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, Mail } from 'lucide-react';
+import { MapPin, Mail } from 'lucide-react';
 import { motion } from 'motion/react';
 import logo from '../../assets/logo-white.png';
 
@@ -44,13 +44,10 @@ export function Footer() {
                 <MapPin className="w-4 h-4" />
                 <span>Sakrand, Sindh, Pakistan</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4" />
-                <span>+92 XXX XXXXXXX</span>
-              </div>
+
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4" />
-                <span>info@dharejoagri.com</span>
+                <span>dharejoagri@gmail.com</span>
               </div>
             </div>
           </motion.div>

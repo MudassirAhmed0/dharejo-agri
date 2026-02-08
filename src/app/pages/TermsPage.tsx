@@ -57,7 +57,7 @@ export function TermsPage() {
     },
     {
       title: '14. Contact Information',
-      content: 'For questions or concerns regarding these terms and conditions, please contact us at info@dharejoagri.com or visit our office in Sakrand, Sindh, Pakistan.'
+      content: 'For questions or concerns regarding these terms and conditions, please contact us at dharejoagri@gmail.com or visit our office in Sakrand, Sindh, Pakistan.'
     }
   ];
 

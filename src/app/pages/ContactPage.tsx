@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
+import { MapPin, Mail, Clock, Send } from 'lucide-react';
 
 
 export function ContactPage() {
@@ -11,15 +11,9 @@ export function ContactPage() {
       description: 'Visit our farm operations'
     },
     {
-      icon: Phone,
-      title: 'Phone',
-      content: '+92 300 1234567', // Placeholder updated to look more realistic pattern if desired, or keep as is. Let's keep generic for now but consistent.
-      description: 'Mon-Sat, 8:00 AM - 6:00 PM'
-    },
-    {
       icon: Mail,
       title: 'Email',
-      content: 'info@dharejoagri.com',
+      content: 'dharejoagri@gmail.com',
       description: 'We respond within 24 hours'
     },
     {
@@ -54,7 +48,7 @@ export function ContactPage() {
       {/* Contact Info Cards - Enhanced Layout */}
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {contactInfo.map((info, index) => (
               <motion.div
                 key={index}
