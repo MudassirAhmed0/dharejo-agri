@@ -4,8 +4,8 @@ import { Navigation } from './components/Navigation';
 import { Footer } from './components/Footer';
 import { ScrollToTop } from './components/ScrollToTop';
 import { HomePage } from './pages/HomePage';
-import { ServicesPage } from './pages/ServicesPage';
-import { GalleryPage } from './pages/GalleryPage';
+import { RhodesPage } from './pages/RhodesPage';
+import { CommodityPage } from './pages/CommodityPage';
 import { ContactPage } from './pages/ContactPage';
 import { TermsPage } from './pages/TermsPage';
 import { PrivacyPage } from './pages/PrivacyPage';
@@ -25,13 +25,13 @@ export default function App() {
   return (
     <Router>
       <ScrollToTopOnNavigate />
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col bg-background font-sans">
         <Navigation />
         <main className="flex-1">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/services" element={<ServicesPage />} />
-            <Route path="/gallery" element={<GalleryPage />} />
+            <Route path="/rhodes-grass" element={<RhodesPage />} />
+            <Route path="/:productId" element={<CommodityPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />

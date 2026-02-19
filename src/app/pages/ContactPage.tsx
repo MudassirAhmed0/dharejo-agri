@@ -1,118 +1,132 @@
+import { SEO } from '../components/SEO';
 import { motion } from 'motion/react';
-import { MapPin, Mail, Clock, Send } from 'lucide-react';
-
+import { MapPin, Mail, Phone, Clock, Send } from 'lucide-react';
 
 export function ContactPage() {
   const contactInfo = [
     {
       icon: MapPin,
-      title: 'Location',
-      content: 'Sakrand, Sindh, Pakistan',
-      description: 'Visit our farm operations'
+      title: 'Farming Locations',
+      content: 'Sakrand & Saleh Pat',
+      description: 'Main production fields'
+    },
+    {
+      icon: MapPin,
+      title: 'Dates Farm',
+      content: 'Khairpur, Sindh',
+      description: 'Dedicated date cultivation'
     },
     {
       icon: Mail,
-      title: 'Email',
+      title: 'Email Us',
       content: 'dharejoagri@gmail.com',
-      description: 'We respond within 24 hours'
+      description: 'For bulk inquiries & export'
     },
     {
       icon: Clock,
       title: 'Working Hours',
-      content: 'Mon-Sat: 8:00 AM - 6:00 PM',
-      description: 'Sunday: Closed'
+      content: 'Mon-Sat: 9:00 AM - 6:00 PM',
+      description: 'Field operations active 24/7'
     }
   ];
 
   return (
-    <div className="min-h-screen pt-24 pb-20">
-      {/* Header */}
-      <section className="bg-gradient-to-b from-primary to-primary/90 text-primary-foreground py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center"
-          >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">Contact Us</h1>
-            <p className="text-xl text-primary-foreground/90 max-w-3xl mx-auto leading-relaxed">
-              Get in touch with us for inquiries about Rhodes grass supply, pricing, or partnership opportunities.
-              <br />
-              <span className="text-lg mt-2 block opacity-80">Direct contact preferred for faster service.</span>
-            </p>
-          </motion.div>
-        </div>
-      </section>
+    <>
+      <SEO 
+        title="Contact Dharejo Agri | Bulk Rhodes Grass Supply" 
+        description="Contact Dharejo Agri for bulk Rhodes Grass supply, wheat, or dates. Farming operations in Sakrand, Saleh Pat, and Khairpur." 
+      />
 
-      {/* Contact Info Cards - Enhanced Layout */}
-      <section className="py-20 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {contactInfo.map((info, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -10, transition: { duration: 0.3 } }}
-                className="bg-card rounded-2xl p-10 shadow-xl border border-border hover:shadow-2xl transition-all text-center flex flex-col items-center justify-center min-h-[250px]"
-              >
-                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-6">
-                  <info.icon className="w-10 h-10 text-primary" />
-                </div>
-                <h3 className="text-2xl font-bold mb-3">{info.title}</h3>
-                {info.title === 'Location' ? (
-                  <a 
-                    href="https://www.google.com/maps/search/?api=1&query=Sakrand,+Sindh,+Pakistan" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-xl text-primary hover:underline font-semibold mb-2 block"
-                  >
-                    {info.content}
-                  </a>
-                ) : (
-                  <p className="text-xl text-foreground font-semibold mb-2">{info.content}</p>
-                )}
-                <p className="text-muted-foreground text-lg">{info.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Map Section - Integrated */}
-      <section className="py-12 bg-background pt-0">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="rounded-3xl overflow-hidden shadow-2xl h-[500px] bg-muted relative group"
-          >
-            {/* Overlay link to maps */}
-            <a 
-              href="https://www.google.com/maps/search/?api=1&query=Sakrand,+Sindh,+Pakistan"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="absolute inset-0 flex items-center justify-center bg-black/5 hover:bg-black/10 transition-colors z-10"
+      <div className="min-h-screen pt-24 pb-20">
+        {/* Header */}
+        <section className="bg-primary text-white py-20 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10" />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
             >
-              <div className="text-center bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-gray-100 transform group-hover:scale-105 transition-transform">
-                <MapPin className="w-16 h-16 text-primary mx-auto mb-4" />
-                <h3 className="text-3xl font-bold mb-2">Locate Us on Map</h3>
-                <p className="text-muted-foreground text-lg">Click to open Google Maps navigation</p>
-                <div className="mt-4 inline-flex items-center text-primary font-semibold">
-                  Open Maps <Send className="w-4 h-4 ml-2" />
-                </div>
+              <h1 className="text-4xl md:text-6xl font-bold mb-6">Contact Dharejo Agri</h1>
+              <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
+                Looking for reliable Rhodes Grass suppliers? Need bulk agricultural supply from Sindh?
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Contact Info Cards */}
+        <section className="py-20 bg-background">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {contactInfo.map((info, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="bg-card rounded-xl p-8 shadow-sm border border-border hover:shadow-lg transition-all text-center"
+                >
+                  <div className="w-14 h-14 bg-primary/5 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <info.icon className="w-7 h-7 text-primary" />
+                  </div>
+                  <h3 className="text-lg font-bold mb-2 text-foreground">{info.title}</h3>
+                  <p className="text-xl font-bold text-primary mb-2">{info.content}</p>
+                  <p className="text-muted-foreground text-sm">{info.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Inquiry Section */}
+        <section className="py-20 bg-muted/30">
+          <div className="max-w-4xl mx-auto px-6">
+            <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-border">
+              <div className="text-center mb-10">
+                <h2 className="text-3xl font-bold text-primary mb-4">Send us a Message</h2>
+                <p className="text-muted-foreground">
+                  We welcome inquiries from dairy farms, livestock suppliers, and export buyers.
+                </p>
               </div>
-            </a>
-            {/* Placeholder map background pattern or image could go here */}
-            <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80')] bg-cover bg-center" />
-          </motion.div>
-        </div>
-      </section>
-    </div>
+
+              <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-2">Name</label>
+                    <input type="text" className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:ring-2 focus:ring-ring outline-none transition-all" placeholder="Your Name" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-2">Phone</label>
+                    <input type="tel" className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:ring-2 focus:ring-ring outline-none transition-all" placeholder="+92..." />
+                  </div>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">Subject</label>
+                  <select className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:ring-2 focus:ring-ring outline-none transition-all">
+                    <option>Bulk Rhodes Grass Supply</option>
+                    <option>Wheat / Mustard Inquiry</option>
+                    <option>Dates (Khairpur) Inquiry</option>
+                    <option>Export Partnership</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">Message</label>
+                  <textarea rows={4} className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:ring-2 focus:ring-ring outline-none transition-all" placeholder="Tell us about your requirements (Quantity, Location, etc.)"></textarea>
+                </div>
+
+                <button className="w-full py-4 bg-primary text-white font-bold rounded-lg hover:bg-primary/90 transition-all flex items-center justify-center gap-2">
+                  <Send className="w-5 h-5" /> Send Inquiry
+                </button>
+              </form>
+            </div>
+          </div>
+        </section>
+      </div>
+    </>
   );
 }

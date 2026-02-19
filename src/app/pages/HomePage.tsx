@@ -1,428 +1,248 @@
-import { motion, useScroll, useTransform } from 'motion/react';
+import { SEO } from '../components/SEO';
+import { motion } from 'motion/react';
+import { StatCard } from '../components/StatCard';
 import { Link } from 'react-router-dom';
-import { ImageWithFallback } from '../components/figma/ImageWithFallback';
-import { Sprout, TrendingUp, Award, Globe, CheckCircle, ArrowRight, Leaf, Package, Target } from 'lucide-react';
-import { useState, useEffect } from 'react';
-
-// Animated Counter Component
-function AnimatedCounter({ end, duration = 2, suffix = '' }: { end: number; duration?: number; suffix?: string }) {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    let startTime: number;
-    let animationFrame: number;
-
-    const animate = (currentTime: number) => {
-      if (!startTime) startTime = currentTime;
-      const progress = Math.min((currentTime - startTime) / (duration * 1000), 1);
-      
-      setCount(Math.floor(progress * end));
-
-      if (progress < 1) {
-        animationFrame = requestAnimationFrame(animate);
-      }
-    };
-
-    animationFrame = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animationFrame);
-  }, [end, duration]);
-
-  return <span>{count}{suffix}</span>;
-}
+import { ArrowRight, MapPin, CheckCircle2 } from 'lucide-react';
+import { products } from '../data/products';
+// Importing a hero video - choosing one that looks good as a background
+import heroVideo from '../../assets/Cutting Process.mp4'; 
 
 export function HomePage() {
-  const { scrollYProgress } = useScroll();
-  const y = useTransform(scrollYProgress, [0, 1], [0, -50]);
-
-  const features = [
-    {
-      icon: Sprout,
-      title: 'Full Cycle Management',
-      description: 'Complete in-house production from irrigation to dispatch',
-      color: 'from-green-400 to-emerald-600'
-    },
-    {
-      icon: Award,
-      title: 'Quality Assurance',
-      description: 'Strict moisture control and quality checking at every stage',
-      color: 'from-amber-400 to-orange-600'
-    },
-    {
-      icon: TrendingUp,
-      title: 'Growing Capacity',
-      description: 'Expanding from 700 to 1,000 tons annually',
-      color: 'from-blue-400 to-cyan-600'
-    },
-    {
-      icon: Globe,
-      title: 'Export Ready',
-      description: 'Serving dairy farms, traders, and international markets',
-      color: 'from-purple-400 to-indigo-600'
-    }
-  ];
-
-  const stats = [
-    { value: 700, suffix: '+', label: 'Tons Annually', icon: Package },
-    { value: 11, suffix: '', label: 'Production Stages', icon: Target },
-    { value: 1000, suffix: '', label: 'Tons Target', icon: TrendingUp },
-    { value: 100, suffix: '%', label: 'Quality Control', icon: Award }
-  ];
-
-  const processes = [
-    'Irrigation & Field Preparation',
-    'Sowing & Crop Development',
-    'Fertilization & Crop Care',
-    'Cutting & Harvesting',
-    'Tedding & Moisture Control',
-    'Drying & Field Lining',
-    'Baling & Collection',
-    'Loading & Dispatch'
-  ];
-
   return (
-    <div className="min-h-screen">{/* Hero Section with Parallax */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        {/* Animated Background with Parallax */}
-        <motion.div
-          style={{ y }}
-          className="absolute inset-0"
-        >
-          <motion.div
-            initial={{ scale: 1.2, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 1.5, ease: 'easeOut' }}
-            className="absolute inset-0"
-          >
-            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70 z-10" />
-            <ImageWithFallback
-              src="https://images.unsplash.com/photo-1630936583832-79091f5945de?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyaG9kZXMlMjBncmFzcyUyMGZpZWxkJTIwYWdyaWN1bHR1cmV8ZW58MXx8fHwxNzcwNDE0NTc5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-              alt="Rhodes Grass Field"
-              className="w-full h-full object-cover"
-            />
-          </motion.div>
-        </motion.div>
+    <>
+      <SEO 
+        title="Rhodes Grass Producers in Sindh | Dharejo Agri Sakrand & Saleh Pat" 
+        description="Dharejo Agri produces 7000 tons of Rhodes Grass annually in Sakrand and Saleh Pat, Sindh. Supplier of Mustard, Wheat, Vegetables, and Dates farm at Khairpur." 
+      />
 
-        {/* Floating Elements */}
-        <motion.div
-          animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 left-10 z-20 opacity-20"
-        >
-          <Leaf className="w-24 h-24 text-white" />
-        </motion.div>
-        <motion.div
-          animate={{ y: [0, 20, 0], rotate: [0, -5, 0] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-1/4 right-10 z-20 opacity-20"
-        >
-          <Sprout className="w-32 h-32 text-white" />
-        </motion.div>
+      {/* HERO SECTION */}
+      <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden bg-primary">
+        {/* Video Background */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-primary/60 z-10" />
+          <video 
+            src={heroVideo}
+            className="w-full h-full object-cover opacity-60 grayscale mix-blend-overlay"
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
+        </div>
 
-        {/* Hero Content */}
-        <div className="relative z-20 text-center px-4 max-w-6xl mx-auto">
+        <div className="relative z-20 max-w-7xl mx-auto px-6 lg:px-8 pt-20">
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="inline-block mb-6 px-6 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20"
-          >
-            <span className="text-white/90 font-medium">Premium Rhodes Grass Producers</span>
-          </motion.div>
-          
-          <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight"
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl"
           >
-            Dharejo Agri &<br />
-            <span className="bg-gradient-to-r from-green-400 via-emerald-400 to-teal-400 bg-clip-text text-transparent">
-              Cattle Farms
+            <span className="inline-block px-4 py-1.5 mb-6 text-sm font-bold tracking-wider text-accent border border-accent/30 rounded-full bg-accent/10 backdrop-blur-sm">
+              PREMIUM AGRI SOLUTIONS
             </span>
-          </motion.h1>
-          
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="text-xl md:text-2xl text-white/90 mb-10 max-w-3xl mx-auto"
-          >
-            Sakrand, Sindh, Pakistan • From Field to Feed
-          </motion.p>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <Link
-              to="/services"
-              className="group relative bg-gradient-to-r from-primary via-accent to-primary hover:shadow-2xl text-primary-foreground px-10 py-5 rounded-full transition-all hover:scale-105 inline-flex items-center justify-center gap-3 overflow-hidden"
-            >
-              <span className="relative z-10 font-semibold">Our Process</span>
-              <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
-              <div className="absolute inset-0 bg-gradient-to-r from-accent via-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity" />
-            </Link>
-            <Link
-              to="/contact"
-              className="group bg-white/10 backdrop-blur-md hover:bg-white/20 border-2 border-white text-white px-10 py-5 rounded-full transition-all hover:scale-105 inline-flex items-center justify-center gap-3"
-            >
-              <span className="font-semibold">Contact Us</span>
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </motion.div>
-        </div>
-
-        {/* Animated Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1, y: [0, 15, 0] }}
-          transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20"
-        >
-          <div className="w-8 h-12 border-2 border-white/60 rounded-full flex justify-center p-2">
-            <motion.div 
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="w-1.5 h-1.5 bg-white rounded-full"
-            />
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-20 bg-gradient-to-b from-white to-muted/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <motion.div
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="inline-block mb-4 px-4 py-2 bg-primary/10 rounded-full"
-            >
-              <span className="text-primary font-semibold text-sm tracking-wide">OUR ADVANTAGES</span>
-            </motion.div>
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Why Choose Dharejo Agri?
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Excellence in every stage of Rhodes grass production
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+              Leading Rhodes Grass <br/> Producers in Sindh
+            </h1>
+            <p className="text-xl md:text-2xl text-white/80 mb-10 max-w-2xl font-light">
+              7000 Tons Annual Production | Sakrand & Saleh Pat | Export Ready Supply
             </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="group relative"
+            
+            <div className="flex flex-col sm:flex-row gap-5">
+              <Link 
+                to="/contact" 
+                className="px-8 py-4 bg-accent text-white font-bold rounded-lg hover:bg-white hover:text-primary transition-all text-center"
               >
-                <motion.div
-                  whileHover={{ y: -15, scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                  className="relative bg-white rounded-2xl p-8 shadow-lg border border-border hover:shadow-2xl transition-all overflow-hidden h-full"
-                >
-                  {/* Gradient Background on Hover */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
-                  
-                  {/* Icon with Gradient */}
-                  <motion.div
-                    whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
-                    transition={{ duration: 0.5 }}
-                    className={`relative w-16 h-16 bg-gradient-to-br ${feature.color} rounded-2xl flex items-center justify-center mb-6 shadow-lg`}
-                  >
-                    <feature.icon className="w-8 h-8 text-white" />
-                  </motion.div>
-                  
-                  <h3 className="text-xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors">
-                    {feature.title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {feature.description}
-                  </p>
-
-                  {/* Corner Accent */}
-                  <div className="absolute -bottom-2 -right-2 w-24 h-24 bg-gradient-to-br from-primary/5 to-transparent rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                </motion.div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Animated Stats Section */}
-      <section className="py-20 bg-gradient-to-br from-primary via-accent to-primary text-white relative overflow-hidden">
-        {/* Animated Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl" />
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Our Impact in Numbers
-            </h2>
-            <p className="text-xl text-white/90">
-              Delivering excellence across every metric
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.5 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="text-center"
-              >
-                <motion.div
-                  initial={{ rotate: 0 }}
-                  whileInView={{ rotate: 360 }}
-                  transition={{ duration: 0.8, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="inline-flex items-center justify-center w-20 h-20 bg-white/10 backdrop-blur-sm rounded-2xl mb-4 border border-white/20"
-                >
-                  <stat.icon className="w-10 h-10 text-white" />
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="text-5xl md:text-6xl font-bold mb-2"
-                >
-                  <AnimatedCounter end={stat.value} duration={2} suffix={stat.suffix} />
-                </motion.div>
-                <div className="text-white/80 font-medium">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Overview Section */}
-      <section className="py-20 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-4xl font-bold text-foreground mb-6">
-                Complete Rhodes Grass Production
-              </h2>
-              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                Dharejo Agri & Cattle Farms manages the full Rhodes grass production cycle internally—from irrigation and sowing to harvesting, drying, baling, and dispatch—ensuring quality control, moisture balance, and consistent supply.
-              </p>
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                Current production: <span className="font-semibold text-primary">~700 tons annually</span>, expanding to <span className="font-semibold text-primary">1,000 tons</span> for dairy farms, traders, and export markets.
-              </p>
-              
-              <div className="space-y-3 mb-8">
-                {processes.slice(0, 4).map((process, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.4, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="flex items-center gap-3"
-                  >
-                    <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span className="text-foreground">{process}</span>
-                  </motion.div>
-                ))}
-              </div>
-
-              <Link
-                to="/services"
-                className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-lg transition-all hover:scale-105"
-              >
-                View All Services
-                <ArrowRight className="w-5 h-5" />
+                Request Supply
               </Link>
+              <Link 
+                to="/rhodes-grass" 
+                className="px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-bold rounded-lg hover:bg-white hover:text-primary transition-all text-center"
+              >
+                View Production
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ABOUT / STATS SECTION */}
+      <section className="py-24 bg-background relative">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-sm font-bold text-accent uppercase tracking-wider mb-2">About Dharejo Agri</h2>
+              <h3 className="text-3xl md:text-4xl font-bold text-primary mb-6">Experienced Producers, Consistent Supply.</h3>
+              <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                Dharejo Agri operates across fertile agricultural zones in Sakrand and Saleh Pat, where climate and soil conditions support strong crop growth.
+              </p>
+              <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+                From soil preparation to final dispatch, every stage is managed under our supervision to ensure quality, consistency, and reliable year-round supply.
+              </p>
+              
+              <div className="bg-primary/5 p-6 rounded-xl border border-primary/10">
+                <h4 className="font-bold text-primary mb-3">Core Strengths</h4>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {[
+                    '7000+ tons annual production',
+                    'Farming in Sakrand & Saleh Pat',
+                    'Dedicated Dates farm (Khairpur)',
+                    'Modern field monitoring'
+                  ].map((item, idx) => (
+                    <li key={idx} className="flex items-center gap-2 text-sm text-foreground/80">
+                      <CheckCircle2 className="w-4 h-4 text-accent" /> {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <ImageWithFallback
-                  src="https://images.unsplash.com/photo-1659262673818-d7b419542d16?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYXklMjBiYWxpbmclMjBmYXJtaW5nfGVufDF8fHx8MTc3MDQxNDU3OXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                  alt="Hay Baling"
-                  className="w-full h-[500px] object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 relative">
+              <StatCard 
+                label="Annual Production" 
+                value="7000+" 
+                subtext="Tons of Rhodes Grass" 
+                icon="chart"
+                delay={0.1}
+              />
+              <StatCard 
+                label="Locations" 
+                value="3" 
+                subtext="Sakrand, Saleh Pat, Khairpur" 
+                icon="location"
+                delay={0.2}
+              />
+              <StatCard 
+                label="Quality" 
+                value="100%" 
+                subtext="Export Ready Standards" 
+                icon="award"
+                delay={0.3}
+              />
+              <div className="bg-primary p-6 rounded-xl flex items-center justify-center text-center">
+                <div>
+                  <h4 className="text-white font-bold text-xl mb-2">Ready for Export</h4>
+                  <p className="text-white/80 text-sm mb-4">Contact us for bulk orders</p>
+                  <Link to="/contact" className="text-accent hover:text-white font-bold flex items-center justify-center gap-1 transition-colors">
+                    Get in touch <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
               </div>
-              
-              {/* Floating Stats Card */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                viewport={{ once: true }}
-                className="absolute -bottom-6 -left-6 bg-white rounded-xl p-6 shadow-2xl border border-border"
-              >
-                <div className="text-4xl font-bold text-primary mb-1">700+</div>
-                <div className="text-sm text-muted-foreground">Tons Annually</div>
-              </motion.div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-primary text-primary-foreground">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl font-bold mb-6">
-              Ready to Partner with Us?
-            </h2>
-            <p className="text-xl text-primary-foreground/90 mb-8 leading-relaxed">
-              Join dairy farms, traders, and export markets who trust Dharejo Agri & Cattle Farms for premium Rhodes grass supply.
+      {/* PRODUCTS SHOWCASE */}
+      <section className="py-24 bg-muted/30">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Our Agricultural Portfolio</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Beyond Rhodes Grass, we cultivate a diverse range of crops to support local and regional food security.
             </p>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 bg-white hover:bg-white/90 text-primary px-8 py-4 rounded-lg transition-all hover:scale-105 hover:shadow-xl"
-            >
-              Get in Touch
-              <ArrowRight className="w-5 h-5" />
-            </Link>
-          </motion.div>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {products.map((product, idx) => {
+              // Image Mapping
+              let bgImage = "https://images.unsplash.com/photo-1625246333195-bf79134a95a2?q=80&w=800";
+              if (product.id === 'rhodes-grass') bgImage = "https://plus.unsplash.com/premium_photo-1661962692059-55d5a4319814?q=80&w=800";
+              if (product.id === 'mustard') bgImage = "https://images.unsplash.com/photo-1503762687835-129979a675fe?q=80&w=800";
+              if (product.id === 'wheat') bgImage = "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=800";
+              if (product.id === 'vegetables') bgImage = "https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?q=80&w=800";
+              if (product.id === 'dates') bgImage = "https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=800";
+
+              return (
+                <motion.div
+                  key={product.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all group border border-border flex flex-col h-full"
+                >
+                  <div className="h-56 relative overflow-hidden bg-gray-100">
+                    <img 
+                      src={bgImage} 
+                      alt={product.title} 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors" />
+                  </div>
+                  
+                  <div className="p-8 flex flex-col flex-grow">
+                    <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">{product.title}</h3>
+                    <p className="text-muted-foreground text-sm line-clamp-3 mb-6 flex-grow">
+                      {product.description}
+                    </p>
+                    <Link 
+                      to={product.link}
+                      className="inline-flex items-center text-primary font-bold hover:text-accent transition-colors mt-auto"
+                    >
+                      Learn More <ArrowRight className="w-4 h-4 ml-1" />
+                    </Link>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </section>
-    </div>
+
+      {/* LOCATIONS MAP SECTION */}
+      <section className="py-24 bg-primary text-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12">Our Farming Locations</h2>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-white/5 backdrop-blur-sm p-8 rounded-xl border border-white/10 hover:bg-white/10 transition-colors">
+              <MapPin className="w-10 h-10 text-accent mx-auto mb-4" />
+              <h3 className="text-xl font-bold mb-2">Sakrand</h3>
+              <p className="text-white/70">Main Rhodes Grass production fields with modern irrigation infrastructure.</p>
+            </div>
+            
+            <div className="bg-white/5 backdrop-blur-sm p-8 rounded-xl border border-white/10 hover:bg-white/10 transition-colors">
+              <MapPin className="w-10 h-10 text-accent mx-auto mb-4" />
+              <h3 className="text-xl font-bold mb-2">Saleh Pat</h3>
+              <p className="text-white/70">Expanded agricultural land utilizing crop rotation for Wheat and Mustard.</p>
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-sm p-8 rounded-xl border border-white/10 hover:bg-white/10 transition-colors">
+              <MapPin className="w-10 h-10 text-accent mx-auto mb-4" />
+              <h3 className="text-xl font-bold mb-2">Khairpur</h3>
+              <p className="text-white/70">Dedicated Dates farm under structured supervision and care.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA SECTION */}
+      <section className="py-24 bg-background border-t border-border">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-5xl font-bold text-primary mb-6">Need Bulk Agricultural Supply?</h2>
+          <p className="text-xl text-muted-foreground mb-10">
+            Contact Dharejo Agri today for reliable Rhodes Grass, Wheat, or Dates supply from Sindh.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link 
+              to="/contact" 
+              className="px-8 py-4 bg-primary text-white font-bold rounded-lg hover:bg-primary/90 transition-all shadow-lg hover:shadow-primary/20"
+            >
+              Contact Us Now
+            </Link>
+            <a 
+              href="mailto:info@dharejoagri.com" 
+              className="px-8 py-4 bg-white border border-border text-foreground font-bold rounded-lg hover:bg-muted transition-all"
+            >
+              Email Us
+            </a>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
