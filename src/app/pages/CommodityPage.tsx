@@ -25,10 +25,10 @@ export function CommodityPage() {
         {/* Hero Image Logic */}
         {(() => {
            let heroImg = "https://images.unsplash.com/photo-1625246333195-bf79134a95a2?q=80&w=2000&auto=format&fit=crop";
-           if (product.id === 'mustard') heroImg = "https://images.unsplash.com/photo-1503762687835-129979a675fe?q=80&w=2000&auto=format&fit=crop";
-           if (product.id === 'wheat') heroImg = "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=2000&auto=format&fit=crop";
-           if (product.id === 'vegetables') heroImg = "https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?q=80&w=2000&auto=format&fit=crop";
-           if (product.id === 'dates') heroImg = "https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=2000&auto=format&fit=crop";
+           if (product.id === 'mustard') heroImg = "https://images.unsplash.com/photo-1620042929498-fa38886980d1?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8bXVzdGFyZCUyMGZpZWxkfGVufDB8fDB8fHww";
+           if (product.id === 'wheat') heroImg = "https://plus.unsplash.com/premium_photo-1670909649532-d1d68ee475cd?fm=jpg&q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+           if (product.id === 'vegetables') heroImg = "https://images.unsplash.com/photo-1704641915515-b827ca0210a8?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dmVnZXRhYmxlJTIwZmllbGR8ZW58MHx8MHx8fDA%3D";
+           if (product.id === 'dates') heroImg = "https://images.unsplash.com/photo-1681143436095-e4b261e4f40a?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
            
            return (
              <div 

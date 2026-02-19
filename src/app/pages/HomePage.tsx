@@ -149,12 +149,12 @@ export function HomePage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {products.map((product, idx) => {
               // Image Mapping
-              let bgImage = "https://images.unsplash.com/photo-1625246333195-bf79134a95a2?q=80&w=800";
-              if (product.id === 'rhodes-grass') bgImage = "https://plus.unsplash.com/premium_photo-1661962692059-55d5a4319814?q=80&w=800";
-              if (product.id === 'mustard') bgImage = "https://images.unsplash.com/photo-1503762687835-129979a675fe?q=80&w=800";
-              if (product.id === 'wheat') bgImage = "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=800";
-              if (product.id === 'vegetables') bgImage = "https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?q=80&w=800";
-              if (product.id === 'dates') bgImage = "https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=800";
+              let bgImage = "https://images.unsplash.com/photo-1625246333195-bf79134a95a2?q=80&w=800"; // Fallback
+              if (product.id === 'rhodes-grass') bgImage = "https://images.unsplash.com/photo-1654906105615-a3fde4528ab3?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cmhvZGUlMjBncmFzc3xlbnwwfHwwfHx8MA%3D%3D";
+              if (product.id === 'mustard') bgImage = "https://images.unsplash.com/photo-1620042929498-fa38886980d1?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8bXVzdGFyZCUyMGZpZWxkfGVufDB8fDB8fHww";
+              if (product.id === 'wheat') bgImage = "https://plus.unsplash.com/premium_photo-1670909649532-d1d68ee475cd?fm=jpg&q=60&w=800&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+              if (product.id === 'vegetables') bgImage = "https://images.unsplash.com/photo-1704641915515-b827ca0210a8?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dmVnZXRhYmxlJTIwZmllbGR8ZW58MHx8MHx8fDA%3D";
+              if (product.id === 'dates') bgImage = "https://images.unsplash.com/photo-1681143436095-e4b261e4f40a?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
               return (
                 <motion.div
