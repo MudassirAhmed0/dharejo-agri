@@ -1,6 +1,6 @@
 import { SEO } from '../components/SEO';
 import { motion } from 'motion/react';
-import { MapPin, Mail, Phone, Clock, Send } from 'lucide-react';
+import { MapPin, Mail, Clock, Send } from 'lucide-react';
 
 export function ContactPage() {
   const contactInfo = [
@@ -49,7 +49,7 @@ export function ContactPage() {
             >
               <h1 className="text-4xl md:text-6xl font-bold mb-6">Contact Dharejo Agri</h1>
               <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
-                Looking for reliable Rhodes Grass suppliers? Need bulk agricultural supply from Sindh?
+                For inquiries regarding Rhodes Grass supply, Cattle Farm operations, Mustard, Wheat, Vegetables, or Dates at Khairpur, please contact us directly.
               </p>
             </motion.div>
           </div>
@@ -72,7 +72,7 @@ export function ContactPage() {
                     <info.icon className="w-7 h-7 text-primary" />
                   </div>
                   <h3 className="text-lg font-bold mb-2 text-foreground">{info.title}</h3>
-                  <p className="text-xl font-bold text-primary mb-2">{info.content}</p>
+                  <p className="text-xl font-bold text-primary mb-2 break-all">{info.content}</p>
                   <p className="text-muted-foreground text-sm">{info.description}</p>
                 </motion.div>
               ))}

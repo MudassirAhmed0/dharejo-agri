@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import { MapPin, Mail, Facebook, Instagram } from 'lucide-react';import { motion } from 'motion/react';
-import logo from '../../assets/logo-white.png';
+import { MapPin, Mail, Facebook, Instagram } from 'lucide-react';
+import { motion } from 'motion/react';
+import logoWhite from '../../assets/logo-white.png';
 import { products } from '../data/products';
 
 export function Footer() {
@@ -18,23 +19,16 @@ export function Footer() {
             viewport={{ once: true }}
             className="space-y-6"
           >
-            <img 
-              src={logo} 
-              alt="Dharejo Agri" 
+            <img
+              src={logoWhite}
+              alt="Dharejo Agri"
               className="h-16 w-auto"
             />
             <p className="text-primary-foreground/80 leading-relaxed text-sm">
               Dharejo Agri stands for agricultural strength built on experience and disciplined field control. 
               We are leading producers of Rhodes Grass, specializing in large scale cultivated supply.
             </p>
-            <div className="flex gap-4">
-              <a href="#" className="p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors">
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a href="#" className="p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors">
-                <Instagram className="w-5 h-5" />
-              </a>
-            </div>
+             
           </motion.div>
 
           {/* Quick Links */}
@@ -108,7 +102,7 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-accent shrink-0" />
-                <a href="mailto:info@dharejoagri.com" className="text-sm text-primary-foreground/80 hover:text-white">
+                <a href="mailto:info@dharejoagri.com" className="text-sm text-primary-foreground/80 hover:text-white break-all">
                   info@dharejoagri.com
                 </a>
               </li>

@@ -14,9 +14,10 @@ export function Navigation() {
 
   // Pages where the navbar should be transparent at the top (Dark Hero Backgrounds)
   // Home, Rhodes Grass, and individual Product pages
-  const isTransparentPage = 
-    location.pathname === '/' || 
-    location.pathname === '/rhodes-grass' || 
+  const isTransparentPage =
+    location.pathname === '/' ||
+    location.pathname === '/rhodes-grass' ||
+    location.pathname === '/cattle-farm' ||
     products.some(p => p.link === location.pathname);
 
   useEffect(() => {
@@ -43,10 +44,10 @@ export function Navigation() {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="flex items-center group relative z-50">
-            <div className={`p-2 rounded-lg transition-colors`}>
-              <img 
-                src={showScrolledStyle ? logo : logoWhite} 
-                alt="Dharejo Agri" 
+            <div className="p-2 rounded-lg transition-colors">
+              <img
+                src={showScrolledStyle ? logo : logoWhite}
+                alt="Dharejo Agri"
                 className="h-10 w-auto md:h-12"
               />
             </div>
@@ -70,6 +71,15 @@ export function Navigation() {
               } hover:text-accent`}
             >
               RHODES GRASS
+            </Link>
+
+            <Link
+              to="/cattle-farm"
+              className={`px-4 py-2 text-sm font-semibold tracking-wide transition-colors ${
+                showScrolledStyle ? 'text-primary' : 'text-white'
+              } hover:text-accent`}
+            >
+              CATTLE FARM
             </Link>
 
             {/* Products Dropdown */}
@@ -126,7 +136,7 @@ export function Navigation() {
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className={`md:hidden relative z-50 p-2 rounded-lg transition-colors ${
-              showScrolledStyle ? 'text-primary hover:bg-muted' : 'text-white hover:bg-white/20'
+              mobileMenuOpen ? 'text-white hover:bg-white/20' : showScrolledStyle ? 'text-primary hover:bg-muted' : 'text-white hover:bg-white/20'
             }`}
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -142,30 +152,37 @@ export function Navigation() {
               exit={{ opacity: 0, height: 0 }}
               className="fixed inset-0 bg-primary z-40 pt-24 px-6 overflow-y-auto"
             >
-              <div className="flex flex-col space-y-4">
+              <div className="flex flex-col space-y-3">
                 <Link
                   to="/"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-2xl font-bold text-white border-b border-white/10 pb-4"
+                  className="text-base font-semibold text-white border-b border-white/10 pb-3"
                 >
                   Home
                 </Link>
                 <Link
                   to="/rhodes-grass"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-2xl font-bold text-white border-b border-white/10 pb-4"
+                  className="text-base font-semibold text-white border-b border-white/10 pb-3"
                 >
                   Rhodes Grass
                 </Link>
-                
+                <Link
+                  to="/cattle-farm"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-base font-semibold text-white border-b border-white/10 pb-3"
+                >
+                  Cattle Farm
+                </Link>
+
                 <div className="py-2">
-                  <p className="text-sm font-semibold text-white/60 mb-2 uppercase tracking-wider">Other Products</p>
+                  <p className="text-xs font-semibold text-white/50 mb-2 uppercase tracking-widest">Other Products</p>
                   {products.filter(p => p.id !== 'rhodes-grass').map((product) => (
                     <Link
                       key={product.link}
                       to={product.link}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="block py-3 text-xl font-medium text-white hover:text-accent transition-colors"
+                      className="block py-2.5 text-sm font-medium text-white/90 hover:text-accent transition-colors"
                     >
                       {product.title}
                     </Link>
@@ -175,7 +192,7 @@ export function Navigation() {
                 <Link
                   to="/contact"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="mt-8 py-4 text-center text-lg font-bold bg-accent text-white rounded-lg"
+                  className="mt-6 py-3 text-center text-sm font-bold bg-accent text-white rounded-lg"
                 >
                   Contact Us
                 </Link>

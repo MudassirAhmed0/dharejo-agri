@@ -1,9 +1,30 @@
+// Product images from local assets
+import mustardThumb from '../../assets/Mustard/Thumbnail.jpeg';
+import mustardAsset1 from '../../assets/Mustard/Asset1.jpeg';
+import mustardAsset2 from '../../assets/Mustard/Asset2.jpeg';
+import wheatPrimary from '../../assets/Wheat/Primary.jpeg';
+import wheatSecondary from '../../assets/Wheat/Secondary.jpeg';
+import datesPrimary from '../../assets/Dates/Primary.jpeg';
+import datesSecondary from '../../assets/Dates/Secondary.jpeg';
+import moistureControl from '../../assets/Moisture control.jpeg';
+import locationImg from '../../assets/Location.jpeg';
+import rhodesVideo1 from '../../assets/Rhodes Grass/Video1.mp4';
+import rhodesThumb from '../../assets/rhodes-grass-thumbnail.jpeg';
+import vegetablesThumb from '../../assets/vegetables-thumbnail.jpeg';
+import mustardAsset3 from '../../assets/Mustard/Asset3.mp4';
+import mustardAsset4 from '../../assets/Mustard/Asset4.mp4';
+
 export interface ProductData {
   id: string;
   title: string;
   link: string;
   description: string;
   features: string[];
+  thumbnail: string;
+  thumbnailVideo?: string;
+  heroImage: string;
+  galleryImages: string[];
+  galleryVideos?: string[];
   detailedContent: {
     heading: string;
     body: string[];
@@ -22,6 +43,10 @@ export const products: ProductData[] = [
       'Consistent Quality',
       'Controlled Moisture'
     ],
+    thumbnail: rhodesThumb,
+    thumbnailVideo: rhodesVideo1,
+    heroImage: locationImg,
+    galleryImages: [moistureControl, locationImg],
     detailedContent: {
       heading: 'Rhodes Grass Production in Sakrand & Saleh Pat',
       body: [
@@ -43,6 +68,11 @@ export const products: ProductData[] = [
       'High Plant Strength',
       'Regional Supply'
     ],
+    thumbnail: mustardThumb,
+    thumbnailVideo: mustardAsset3,
+    heroImage: mustardAsset1,
+    galleryImages: [mustardAsset1, mustardAsset2, mustardThumb],
+    galleryVideos: [mustardAsset3, mustardAsset4],
     detailedContent: {
       heading: 'Mustard Cultivation in Sakrand & Saleh Pat',
       body: [
@@ -63,6 +93,9 @@ export const products: ProductData[] = [
       'Proper Grain Maturity',
       'Crop Rotation Strategy'
     ],
+    thumbnail: wheatPrimary,
+    heroImage: wheatPrimary,
+    galleryImages: [wheatPrimary, wheatSecondary],
     detailedContent: {
       heading: 'Wheat Farming Operations',
       body: [
@@ -83,6 +116,9 @@ export const products: ProductData[] = [
       'Clean Harvesting',
       'Timely Supply'
     ],
+    thumbnail: vegetablesThumb,
+    heroImage: vegetablesThumb,
+    galleryImages: [vegetablesThumb, locationImg],
     detailedContent: {
       heading: 'Seasonal Vegetable Production',
       body: [
@@ -103,6 +139,9 @@ export const products: ProductData[] = [
       'Proper Pruning',
       'Careful Handling'
     ],
+    thumbnail: datesPrimary,
+    heroImage: datesPrimary,
+    galleryImages: [datesPrimary, datesSecondary],
     detailedContent: {
       heading: 'Dates Farm at Khairpur',
       body: [
@@ -114,60 +153,41 @@ export const products: ProductData[] = [
   }
 ];
 
-import sowingVideo from '../../assets/Sowing, Fertiliser and Care.mp4';
-import waterVideo from '../../assets/water-arrangement.mp4';
-import cuttingVideo from '../../assets/Cutting Process.mp4';
-import tedderVideo from '../../assets/Tedder to control moisture.mp4';
-import balingVideo from '../../assets/Baleing.mp4';
-import loadingVideo from '../../assets/Collection from field and loading.mp4';
-
 export const processSteps = [
   {
     step: 1,
     title: 'Land Preparation & Sowing',
     description: 'Deep ploughing, leveling, and identifying the best seed variety for the season.',
     icon: 'tractor',
-    media: sowingVideo,
-    mediaType: 'video'
   },
   {
     step: 2,
     title: 'Water Arrangement',
     description: 'Scheduled irrigation ensuring consistent moisture levels for optimal growth.',
     icon: 'droplets',
-    media: waterVideo,
-    mediaType: 'video'
   },
   {
     step: 3,
     title: 'Harvesting / Cutting',
     description: 'Cutting at the nutritional peak using modern disc mowers.',
     icon: 'scissors',
-    media: cuttingVideo,
-    mediaType: 'video'
   },
   {
     step: 4,
     title: 'Sun Drying & Tedding',
     description: 'Natural drying accelerated by mechanical tedders to reach target moisture.',
     icon: 'sun',
-    media: tedderVideo,
-    mediaType: 'video'
   },
   {
     step: 5,
     title: 'Baling',
     description: 'High-density baling ensuring compact, transport-ready square bales.',
     icon: 'package',
-    media: balingVideo,
-    mediaType: 'video'
   },
   {
     step: 6,
     title: 'Storage & Loading',
     description: 'Stored in dry sheds and loaded systematically for export/local dispatch.',
     icon: 'activity',
-    media: loadingVideo,
-    mediaType: 'video'
   }
 ];

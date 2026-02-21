@@ -1,13 +1,35 @@
+import { useState } from 'react';
 import { SEO } from '../components/SEO';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { StatCard } from '../components/StatCard';
 import { Link } from 'react-router-dom';
-import { ArrowRight, MapPin, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, MapPin, CheckCircle2, Beef, HeartPulse, Wheat, Home, X, Play } from 'lucide-react';
 import { products } from '../data/products';
-// Importing a hero video - choosing one that looks good as a background
-import heroVideo from '../../assets/Cutting Process.mp4'; 
+
+// Process videos for Full Production Cycle
+import sowingVideo from '../../assets/Sowing, Fertiliser and Care.mp4';
+import waterVideo from '../../assets/water-arrangement.mp4';
+import cuttingVideo from '../../assets/Cutting Process.mp4';
+import tedderVideo from '../../assets/Tedder to control moisture.mp4';
+import balingVideo from '../../assets/Baling 1/Baling.mp4';
+import liningVideo from '../../assets/Lining for the packing.mp4';
+import collectionVideo1 from '../../assets/Collection form field/Asset1.mp4';
+import collectionVideo2 from '../../assets/Collection form field/Asset2.mp4';
+
+const productionCycle = [
+  { src: sowingVideo, title: 'Sowing, Fertiliser & Care' },
+  { src: waterVideo, title: 'Water Arrangement' },
+  { src: cuttingVideo, title: 'Cutting Process' },
+  { src: tedderVideo, title: 'Tedder — Moisture Control' },
+  { src: balingVideo, title: 'Baling Operations' },
+  { src: liningVideo, title: 'Lining for Packing' },
+  { src: collectionVideo1, title: 'Collection from Field' },
+  { src: collectionVideo2, title: 'Loading & Dispatch' },
+];
 
 export function HomePage() {
+  const [lightbox, setLightbox] = useState<{ type: 'video'; src: string; title?: string } | null>(null);
+
   return (
     <>
       <SEO 
@@ -17,16 +39,13 @@ export function HomePage() {
 
       {/* HERO SECTION */}
       <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden bg-primary">
-        {/* Video Background */}
+        {/* Image Background */}
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-primary/60 z-10" />
-          <video 
-            src={heroVideo}
+          <img
+            src="https://images.unsplash.com/photo-1595113316349-9fa4eb24f884?q=80&w=2000&auto=format&fit=crop"
+            alt=""
             className="w-full h-full object-cover opacity-60 grayscale mix-blend-overlay"
-            autoPlay
-            muted
-            loop
-            playsInline
           />
         </div>
 
@@ -40,7 +59,7 @@ export function HomePage() {
             <span className="inline-block px-4 py-1.5 mb-6 text-sm font-bold tracking-wider text-accent border border-accent/30 rounded-full bg-accent/10 backdrop-blur-sm">
               PREMIUM AGRI SOLUTIONS
             </span>
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+            <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight">
               Leading Rhodes Grass <br/> Producers in Sindh
             </h1>
             <p className="text-xl md:text-2xl text-white/80 mb-10 max-w-2xl font-light">
@@ -136,6 +155,94 @@ export function HomePage() {
         </div>
       </section>
 
+      {/* CATTLE FARM SECTION */}
+      <section className="py-24 bg-muted/20 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Image Side */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="relative rounded-2xl overflow-hidden shadow-xl h-[480px]">
+                <img
+                  src="https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?q=80&w=1200&auto=format&fit=crop"
+                  alt="Cattle grazing at Dharejo Agri farm"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-8">
+                  <p className="text-white font-bold text-lg">Supervised Livestock Care</p>
+                  <p className="text-white/80 text-sm">Proper feeding, clean housing & regular monitoring</p>
+                </div>
+              </div>
+
+              {/* Floating accent card */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+                className="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-lg border border-border hidden md:flex items-center gap-3"
+              >
+                <div className="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center">
+                  <Wheat className="w-6 h-6 text-secondary" />
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-foreground">Rhodes Grass Fed</p>
+                  <p className="text-xs text-muted-foreground">Own production for livestock</p>
+                </div>
+              </motion.div>
+            </motion.div>
+
+            {/* Text Side */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-sm font-bold text-accent uppercase tracking-wider mb-2">Livestock Operations</h2>
+              <h3 className="text-3xl md:text-4xl font-bold text-primary mb-6">Our Cattle Farm</h3>
+              <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                Alongside crop production, Dharejo Agri & Cattle Farms also manages a dedicated cattle farm operation.
+              </p>
+              <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                Our cattle are raised under supervised care with proper feeding management, clean housing conditions, and regular monitoring. A portion of our own Rhodes Grass production supports livestock nutrition, ensuring consistent feed quality.
+              </p>
+              <p className="text-lg text-muted-foreground leading-relaxed mb-10">
+                The cattle farm strengthens our agricultural cycle by connecting feed production with livestock management under one system.
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {[
+                  { icon: HeartPulse, label: 'Supervised Care', desc: 'Regular health monitoring' },
+                  { icon: Home, label: 'Clean Housing', desc: 'Maintained shelters' },
+                  { icon: Beef, label: 'Proper Feeding', desc: 'Rhodes Grass nutrition' },
+                ].map((item, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: idx * 0.1 }}
+                    className="bg-white p-4 rounded-xl border border-border shadow-sm text-center"
+                  >
+                    <div className="w-10 h-10 bg-primary/5 rounded-lg flex items-center justify-center mx-auto mb-3">
+                      <item.icon className="w-5 h-5 text-primary" />
+                    </div>
+                    <p className="text-sm font-bold text-foreground">{item.label}</p>
+                    <p className="text-xs text-muted-foreground mt-1">{item.desc}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* PRODUCTS SHOWCASE */}
       <section className="py-24 bg-muted/30">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -148,14 +255,6 @@ export function HomePage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {products.map((product, idx) => {
-              // Image Mapping
-              let bgImage = "https://images.unsplash.com/photo-1625246333195-bf79134a95a2?q=80&w=800"; // Fallback
-              if (product.id === 'rhodes-grass') bgImage = "https://images.unsplash.com/photo-1654906105615-a3fde4528ab3?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cmhvZGUlMjBncmFzc3xlbnwwfHwwfHx8MA%3D%3D";
-              if (product.id === 'mustard') bgImage = "https://images.unsplash.com/photo-1620042929498-fa38886980d1?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8bXVzdGFyZCUyMGZpZWxkfGVufDB8fDB8fHww";
-              if (product.id === 'wheat') bgImage = "https://plus.unsplash.com/premium_photo-1670909649532-d1d68ee475cd?fm=jpg&q=60&w=800&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
-              if (product.id === 'vegetables') bgImage = "https://images.unsplash.com/photo-1704641915515-b827ca0210a8?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dmVnZXRhYmxlJTIwZmllbGR8ZW58MHx8MHx8fDA%3D";
-              if (product.id === 'dates') bgImage = "https://images.unsplash.com/photo-1681143436095-e4b261e4f40a?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
-
               return (
                 <motion.div
                   key={product.id}
@@ -166,11 +265,24 @@ export function HomePage() {
                   className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all group border border-border flex flex-col h-full"
                 >
                   <div className="h-56 relative overflow-hidden bg-gray-100">
-                    <img 
-                      src={bgImage} 
-                      alt={product.title} 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
+                    {product.thumbnailVideo ? (
+                      <video
+                        src={product.thumbnailVideo}
+                        poster={product.thumbnail}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        muted
+                        loop
+                        playsInline
+                        onMouseEnter={(e) => e.currentTarget.play()}
+                        onMouseLeave={(e) => { e.currentTarget.pause(); e.currentTarget.currentTime = 0; }}
+                      />
+                    ) : (
+                      <img
+                        src={product.thumbnail}
+                        alt={product.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                    )}
                     <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors" />
                   </div>
                   
@@ -189,6 +301,61 @@ export function HomePage() {
                 </motion.div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* FULL PRODUCTION CYCLE */}
+      <section className="py-24 bg-background">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-sm font-bold text-accent uppercase tracking-wider mb-2">From Field to Dispatch</h2>
+            <h3 className="text-3xl md:text-4xl font-bold text-primary mb-4">Full Production Cycle</h3>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Watch every stage of our Rhodes Grass production — from sowing to final loading. Hover to preview.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {productionCycle.map((vid, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: idx * 0.05 }}
+                viewport={{ once: true }}
+                onClick={() => setLightbox({ type: 'video', src: vid.src, title: vid.title })}
+                className="relative aspect-square rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all group cursor-pointer"
+              >
+                <video
+                  src={vid.src}
+                  className="w-full h-full object-cover"
+                  muted
+                  loop
+                  playsInline
+                  onMouseEnter={(e) => e.currentTarget.play()}
+                  onMouseLeave={(e) => { e.currentTarget.pause(); e.currentTarget.currentTime = 0; }}
+                />
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center">
+                    <Play className="w-5 h-5 text-white ml-1" />
+                  </div>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-3 pointer-events-none">
+                  <p className="text-white font-bold text-xs">{vid.title}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <Link
+              to="/rhodes-grass"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded-lg hover:bg-accent transition-all"
+            >
+              View Full Rhodes Grass Page <ArrowRight className="w-5 h-5" />
+            </Link>
           </div>
         </div>
       </section>
@@ -243,6 +410,48 @@ export function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {lightbox && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 md:p-8"
+            onClick={() => setLightbox(null)}
+          >
+            <button
+              className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors bg-white/10 p-2 rounded-full"
+              onClick={() => setLightbox(null)}
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              className="relative max-w-5xl w-full aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <video
+                src={lightbox.src}
+                className="w-full h-full object-contain"
+                autoPlay
+                controls
+                playsInline
+              />
+              {lightbox.title && (
+                <div className="absolute top-0 left-0 right-0 p-4 bg-gradient-to-b from-black/80 to-transparent">
+                  <h3 className="text-white font-bold">{lightbox.title}</h3>
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
