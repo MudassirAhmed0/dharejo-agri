@@ -150,6 +150,34 @@ export const products: ProductData[] = [
         'We focus on structured irrigation, proper pruning cycles, timely harvesting, and careful fruit handling.'
       ]
     }
+  },
+  {
+    id: 'mango-orchids',
+    title: 'Mango Orchids',
+    link: '/mango-orchids',
+    description: 'Premium mango orchards managed with seasonal planning, quality variety selection, and dedicated orchard supervision across Sindh.',
+    features: [
+      'Seasonal Harvest',
+      'Quality Varieties',
+      'Orchard Management',
+      'Fresh Supply'
+    ],
+    thumbnail: 'https://plus.unsplash.com/premium_photo-1667223723273-7e6c5a871abc?w=600&auto=format&fit=crop&q=80',
+    heroImage: 'https://images.unsplash.com/photo-1629358821360-500f89a5a907?w=1200&auto=format&fit=crop&q=80',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1629358821360-500f89a5a907?w=800&auto=format&fit=crop&q=80',
+      'https://plus.unsplash.com/premium_photo-1667223723273-7e6c5a871abc?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1653856453410-44220fd90479?w=800&auto=format&fit=crop&q=80'
+    ],
+    detailedContent: {
+      heading: 'Mango Orchards — Seasonal Excellence',
+      body: [
+        'Dharejo Agri manages mango orchards with careful attention to variety selection, tree health, and seasonal harvest timing.',
+        'Our orchards benefit from the favorable climate of Sindh, producing premium quality mangoes that meet both local and export standards.',
+        'Orchard management includes structured pruning, pest control, irrigation scheduling, and post-harvest handling to ensure fresh supply throughout the season.',
+        'We focus on maintaining quality varieties known for taste, size, and shelf life, supporting reliable supply to buyers and markets.'
+      ]
+    }
   }
 ];
 

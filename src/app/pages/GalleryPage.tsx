@@ -1,234 +1,235 @@
-import { motion } from 'motion/react';
+import { SEO } from '../components/SEO';
+import { motion, AnimatePresence } from 'motion/react';
 import { useState } from 'react';
 import { X, Play } from 'lucide-react';
-import { ImageWithFallback } from '../components/figma/ImageWithFallback';
+
+// Images
+import mustardThumb from '../../assets/Mustard/Thumbnail.jpeg';
+import mustardAsset1 from '../../assets/Mustard/Asset1.jpeg';
+import mustardAsset2 from '../../assets/Mustard/Asset2.jpeg';
+import wheatPrimary from '../../assets/Wheat/Primary.jpeg';
+import wheatSecondary from '../../assets/Wheat/Secondary.jpeg';
+import datesPrimary from '../../assets/Dates/Primary.jpeg';
+import datesSecondary from '../../assets/Dates/Secondary.jpeg';
+import moistureControl from '../../assets/Moisture control.jpeg';
+import locationImg from '../../assets/Location.jpeg';
+import rhodesThumb from '../../assets/rhodes-grass-thumbnail.jpeg';
+import vegetablesThumb from '../../assets/vegetables-thumbnail.jpeg';
+
+// Videos
+import rhodesVideo1 from '../../assets/Rhodes Grass/Video1.mp4';
+import rhodesVideo2 from '../../assets/Rhodes Grass/Video2.mp4';
+import rhodesVideo3 from '../../assets/Rhodes Grass/Video3.mp4';
+import mustardVideo1 from '../../assets/Mustard/Asset3.mp4';
+import mustardVideo2 from '../../assets/Mustard/Asset4.mp4';
+import cuttingProcess from '../../assets/Cutting Process.mp4';
+import balingVideo from '../../assets/Baling 1/Baling.mp4';
+import liningPacking from '../../assets/Lining for the packing.mp4';
+import sowingCare from '../../assets/Sowing, Fertiliser and Care.mp4';
+import sowingCare2 from '../../assets/Sowing, Fertiliser and Care2.mp4';
+import tedderMoisture from '../../assets/Tedder to control moisture.mp4';
+import waterArrangement from '../../assets/water-arrangement.mp4';
+import collectionField1 from '../../assets/Collection form field/Asset1.mp4';
+import collectionField2 from '../../assets/Collection form field/Asset2.mp4';
+
+interface GalleryItem {
+  src: string;
+  type: 'image' | 'video';
+  label: string;
+  category: string;
+}
+
+const galleryItems: GalleryItem[] = [
+  // Rhodes Grass
+  { src: rhodesThumb, type: 'image', label: 'Rhodes Grass Field', category: 'Rhodes Grass' },
+  { src: locationImg, type: 'image', label: 'Farm Location', category: 'Rhodes Grass' },
+  { src: moistureControl, type: 'image', label: 'Moisture Control', category: 'Rhodes Grass' },
+  { src: rhodesVideo1, type: 'video', label: 'Rhodes Grass — Field Overview', category: 'Rhodes Grass' },
+  { src: rhodesVideo2, type: 'video', label: 'Rhodes Grass — Harvesting', category: 'Rhodes Grass' },
+  { src: rhodesVideo3, type: 'video', label: 'Rhodes Grass — Processing', category: 'Rhodes Grass' },
+
+  // Mustard
+  { src: mustardThumb, type: 'image', label: 'Mustard Thumbnail', category: 'Mustard' },
+  { src: mustardAsset1, type: 'image', label: 'Mustard Field', category: 'Mustard' },
+  { src: mustardAsset2, type: 'image', label: 'Mustard Crop', category: 'Mustard' },
+  { src: mustardVideo1, type: 'video', label: 'Mustard — Field View', category: 'Mustard' },
+  { src: mustardVideo2, type: 'video', label: 'Mustard — Growth Stage', category: 'Mustard' },
+
+  // Wheat
+  { src: wheatPrimary, type: 'image', label: 'Wheat Field', category: 'Wheat' },
+  { src: wheatSecondary, type: 'image', label: 'Wheat Harvest', category: 'Wheat' },
+
+  // Dates
+  { src: datesPrimary, type: 'image', label: 'Dates Farm', category: 'Dates' },
+  { src: datesSecondary, type: 'image', label: 'Dates Harvest', category: 'Dates' },
+
+  // Mango Orchids
+  { src: 'https://plus.unsplash.com/premium_photo-1667223723273-7e6c5a871abc?w=800&auto=format&fit=crop&q=80', type: 'image', label: 'Mango Tree', category: 'Mango Orchids' },
+  { src: 'https://images.unsplash.com/photo-1629358821360-500f89a5a907?w=800&auto=format&fit=crop&q=80', type: 'image', label: 'Mango Orchard', category: 'Mango Orchids' },
+  { src: 'https://images.unsplash.com/photo-1653856453410-44220fd90479?w=800&auto=format&fit=crop&q=80', type: 'image', label: 'Mango Harvest', category: 'Mango Orchids' },
+
+  // Vegetables
+  { src: vegetablesThumb, type: 'image', label: 'Seasonal Vegetables', category: 'Vegetables' },
+
+  // Operations
+  { src: cuttingProcess, type: 'video', label: 'Cutting Process', category: 'Operations' },
+  { src: balingVideo, type: 'video', label: 'Baling', category: 'Operations' },
+  { src: liningPacking, type: 'video', label: 'Lining for Packing', category: 'Operations' },
+  { src: sowingCare, type: 'video', label: 'Sowing, Fertiliser & Care', category: 'Operations' },
+  { src: sowingCare2, type: 'video', label: 'Sowing & Care — Part 2', category: 'Operations' },
+  { src: tedderMoisture, type: 'video', label: 'Tedder — Moisture Control', category: 'Operations' },
+  { src: waterArrangement, type: 'video', label: 'Water Arrangement', category: 'Operations' },
+  { src: collectionField1, type: 'video', label: 'Collection from Field', category: 'Operations' },
+  { src: collectionField2, type: 'video', label: 'Collection from Field — Part 2', category: 'Operations' },
+];
+
+const categories = ['All', ...Array.from(new Set(galleryItems.map(item => item.category)))];
 
 export function GalleryPage() {
-  const [selectedMedia, setSelectedMedia] = useState<{ type: 'image' | 'video', src: string, title: string } | null>(null);
-  const [activeCategory, setActiveCategory] = useState('all');
+  const [activeCategory, setActiveCategory] = useState('All');
+  const [lightbox, setLightbox] = useState<GalleryItem | null>(null);
 
-  const categories = [
-    { id: 'all', label: 'All' },
-    { id: 'fields', label: 'Fields' },
-    { id: 'harvesting', label: 'Harvesting' },
-    { id: 'baling', label: 'Baling' },
-    { id: 'storage', label: 'Storage' },
-    { id: 'loading', label: 'Loading' }
-  ];
-
-  const media: { type: 'image' | 'video'; src: string; title: string; category: string }[] = [
-    {
-      type: 'image' as const,
-      src: 'https://images.unsplash.com/photo-1630936583832-79091f5945de?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyaG9kZXMlMjBncmFzcyUyMGZpZWxkJTIwYWdyaWN1bHR1cmV8ZW58MXx8fHwxNzcwNDE0NTc5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      title: 'Rhodes Grass Field',
-      category: 'fields'
-    },
-    {
-      type: 'image' as const,
-      src: 'https://images.unsplash.com/photo-1630600967074-3095a8865ca3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxncmVlbiUyMGZhcm1pbmclMjBmaWVsZHxlbnwxfHx8fDE3NzA0MTQ1ODB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      title: 'Lush Green Fields',
-      category: 'fields'
-    },
-    {
-      type: 'image' as const,
-      src: 'https://images.unsplash.com/photo-1768984418592-5b54e4fe7af5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhZ3JpY3VsdHVyYWwlMjBpcnJpZ2F0aW9uJTIwZmllbGR8ZW58MXx8fHwxNzcwNDE0NTc5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      title: 'Irrigation System',
-      category: 'fields'
-    },
-    {
-      type: 'image' as const,
-      src: 'https://images.unsplash.com/photo-1655666614319-3918eba90451?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0cmFjdG9yJTIwaGFydmVzdGluZyUyMHdoZWF0fGVufDF8fHx8MTc3MDQxNDU3OXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      title: 'Harvesting Operations',
-      category: 'harvesting'
-    },
-    // {
-    //   type: 'video' as const,
-    //   src: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    //   title: 'Harvesting Process',
-    //   category: 'harvesting'
-    // },
-    {
-      type: 'image' as const,
-      src: 'https://images.unsplash.com/photo-1659262673818-d7b419542d16?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYXklMjBiYWxpbmclMjBmYXJtaW5nfGVufDF8fHx8MTc3MDQxNDU3OXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      title: 'Hay Baling',
-      category: 'baling'
-    },
-    // {
-    //   type: 'video' as const,
-    //   src: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    //   title: 'Baling Process',
-    //   category: 'baling'
-    // },
-    {
-      type: 'image' as const,
-      src: 'https://images.unsplash.com/photo-1748769594002-3c12522803e6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYXklMjBzdG9yYWdlJTIwYmFybnxlbnwxfHx8fDE3NzA0MTQ1ODB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      title: 'Storage Facility',
-      category: 'storage'
-    },
-    {
-      type: 'image' as const,
-      src: 'https://images.unsplash.com/photo-1739433108012-ebec4d134964?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmYXJtJTIwbGFuZHNjYXBlJTIwcGFraXN0YW58ZW58MXx8fHwxNzcwNDE0NTg0fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      title: 'Farm Landscape',
-      category: 'fields'
-    },
-    {
-      type: 'image' as const,
-      src: 'https://images.unsplash.com/photo-1762232621865-6353bef72f54?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhZ3JpY3VsdHVyYWwlMjBsb2FkaW5nJTIwdHJ1Y2t8ZW58MXx8fHwxNzcwNDE0NTgzfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      title: 'Loading Operations',
-      category: 'loading'
-    },
-    // {
-    //   type: 'video' as const,
-    //   src: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    //   title: 'Loading & Dispatch',
-    //   category: 'loading'
-    // },
-    {
-      type: 'image' as const,
-      src: 'https://images.unsplash.com/photo-1658881070511-c5aa3a883a9b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjYXR0bGUlMjBmYXJtJTIwbGl2ZXN0b2NrfGVufDF8fHx8MTc3MDQxNDU4M3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      title: 'Cattle Farm',
-      category: 'fields'
-    },
-    {
-      type: 'image' as const,
-      src: 'https://images.unsplash.com/photo-1677126577258-1a82fdf1a976?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkcm9uZSUyMGFncmljdWx0dXJlJTIwbW9uaXRvcmluZ3xlbnwxfHx8fDE3NzA0MTQ1ODN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      title: 'Drone Monitoring',
-      category: 'fields'
-    }
-  ];
-
-  const filteredMedia = activeCategory === 'all' 
-    ? media 
-    : media.filter(item => item.category === activeCategory);
+  const filtered = activeCategory === 'All'
+    ? galleryItems
+    : galleryItems.filter(item => item.category === activeCategory);
 
   return (
-    <div className="min-h-screen pt-24 pb-20">
-      {/* Header */}
-      <section className="bg-gradient-to-b from-primary to-primary/90 text-primary-foreground py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center"
-          >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">Gallery</h1>
-            <p className="text-xl text-primary-foreground/90 max-w-3xl mx-auto leading-relaxed">
-              Explore our operations from field to delivery through images and videos
-            </p>
-          </motion.div>
-        </div>
-      </section>
+    <>
+      <SEO
+        title="Gallery | Dharejo Agri"
+        description="Browse photos and videos from Dharejo Agri's farming operations — Rhodes Grass, Mustard, Wheat, Dates, and more."
+      />
 
-      {/* Category Filter */}
-      <section className="py-8 bg-background sticky top-20 z-40 border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap justify-center gap-3">
-            {categories.map((category) => (
-              <motion.button
-                key={category.id}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setActiveCategory(category.id)}
-                className={`px-6 py-2 rounded-full transition-all ${
-                  activeCategory === category.id
-                    ? 'bg-primary text-primary-foreground shadow-lg'
-                    : 'bg-muted text-foreground hover:bg-muted/80'
-                }`}
-              >
-                {category.label}
-              </motion.button>
-            ))}
+      <div className="min-h-screen pt-24 pb-20">
+        {/* Header */}
+        <section className="bg-primary text-white py-20 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10" />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h1 className="text-4xl md:text-6xl font-bold mb-6">Gallery</h1>
+              <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
+                A look into our farming operations, fields, and production processes across Sindh.
+              </p>
+            </motion.div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Gallery Grid */}
-      <section className="py-12 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredMedia.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                whileHover={{ y: -10, transition: { duration: 0.3 } }}
-                onClick={() => setSelectedMedia(item)}
-                className="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all aspect-video bg-muted"
-              >
-                {item.type === 'image' ? (
-                  <ImageWithFallback
-                    src={item.src}
-                    alt={item.title}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-primary/10">
-                    <Play className="w-16 h-16 text-primary" />
-                  </div>
-                )}
-                
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end">
-                  <div className="p-6 text-white w-full">
-                    <h3 className="text-xl font-semibold">{item.title}</h3>
-                    {item.type === 'video' && (
-                      <p className="text-sm text-white/80 mt-1">Click to play video</p>
+        {/* Filter Tabs */}
+        <section className="py-8 bg-background border-b border-border sticky top-[64px] z-30">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-wrap gap-2 justify-center">
+              {categories.map(cat => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-5 py-2 rounded-full text-sm font-semibold transition-all ${
+                    activeCategory === cat
+                      ? 'bg-primary text-white'
+                      : 'bg-muted text-muted-foreground hover:bg-primary/10'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Gallery Grid */}
+        <section className="py-12 bg-background">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filtered.map((item, index) => (
+                <motion.div
+                  key={item.src}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  viewport={{ once: true }}
+                  className="group cursor-pointer rounded-xl overflow-hidden border border-border shadow-sm hover:shadow-lg transition-all bg-card"
+                  onClick={() => setLightbox(item)}
+                >
+                  <div className="relative aspect-video overflow-hidden">
+                    {item.type === 'image' ? (
+                      <img
+                        src={item.src}
+                        alt={item.label}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    ) : (
+                      <>
+                        <video
+                          src={item.src}
+                          muted
+                          playsInline
+                          preload="metadata"
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">
+                          <div className="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center">
+                            <Play className="w-6 h-6 text-primary ml-1" />
+                          </div>
+                        </div>
+                      </>
                     )}
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                  <div className="p-4">
+                    <p className="font-semibold text-foreground text-sm">{item.label}</p>
+                    <p className="text-xs text-muted-foreground mt-1">{item.category}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
-      {/* Lightbox Modal */}
-      {selectedMedia && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
-          onClick={() => setSelectedMedia(null)}
-        >
-          <button
-            onClick={() => setSelectedMedia(null)}
-            className="absolute top-4 right-4 p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors"
-          >
-            <X className="w-6 h-6 text-white" />
-          </button>
-
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightbox && (
           <motion.div
-            initial={{ scale: 0.9 }}
-            animate={{ scale: 1 }}
-            className="max-w-6xl w-full"
-            onClick={(e) => e.stopPropagation()}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4"
+            onClick={() => setLightbox(null)}
           >
-            {selectedMedia.type === 'image' ? (
-              <img
-                src={selectedMedia.src}
-                alt={selectedMedia.title}
-                className="w-full h-auto rounded-lg"
-              />
-            ) : (
-              <div className="aspect-video">
-                <iframe
-                  src={selectedMedia.src}
-                  title={selectedMedia.title}
-                  className="w-full h-full rounded-lg"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
+            <button
+              onClick={() => setLightbox(null)}
+              className="absolute top-6 right-6 text-white hover:text-accent transition-colors z-10"
+            >
+              <X className="w-8 h-8" />
+            </button>
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="max-w-5xl w-full max-h-[85vh]"
+              onClick={e => e.stopPropagation()}
+            >
+              {lightbox.type === 'image' ? (
+                <img
+                  src={lightbox.src}
+                  alt={lightbox.label}
+                  className="w-full h-full object-contain rounded-lg"
                 />
-              </div>
-            )}
-            <h3 className="text-white text-2xl font-semibold mt-4 text-center">
-              {selectedMedia.title}
-            </h3>
+              ) : (
+                <video
+                  src={lightbox.src}
+                  controls
+                  autoPlay
+                  className="w-full max-h-[85vh] rounded-lg"
+                />
+              )}
+              <p className="text-white text-center mt-4 text-lg font-semibold">{lightbox.label}</p>
+            </motion.div>
           </motion.div>
-        </motion.div>
-      )}
-    </div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

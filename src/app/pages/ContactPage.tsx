@@ -1,6 +1,6 @@
 import { SEO } from '../components/SEO';
 import { motion } from 'motion/react';
-import { MapPin, Mail, Clock, Send } from 'lucide-react';
+import { MapPin, Mail, Clock, Send, Building2, Phone } from 'lucide-react';
 
 export function ContactPage() {
   const contactInfo = [
@@ -15,6 +15,12 @@ export function ContactPage() {
       title: 'Dates Farm',
       content: 'Khairpur, Sindh',
       description: 'Dedicated date cultivation'
+    },
+    {
+      icon: Building2,
+      title: 'UAE Office',
+      content: 'Sukkon Business Center, 9-67',
+      description: 'Al Garhoud, Dubai, UAE'
     },
     {
       icon: Mail,
@@ -58,7 +64,7 @@ export function ContactPage() {
         {/* Contact Info Cards */}
         <section className="py-20 bg-background">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {contactInfo.map((info, index) => (
                 <motion.div
                   key={index}
@@ -66,7 +72,7 @@ export function ContactPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-card rounded-xl p-8 shadow-sm border border-border hover:shadow-lg transition-all text-center"
+                  className="bg-card rounded-xl p-10 shadow-sm border border-border hover:shadow-lg transition-all text-center"
                 >
                   <div className="w-14 h-14 bg-primary/5 rounded-full flex items-center justify-center mb-6 mx-auto">
                     <info.icon className="w-7 h-7 text-primary" />
@@ -77,6 +83,31 @@ export function ContactPage() {
                 </motion.div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* UAE Office Details */}
+        <section className="py-16 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="bg-primary/5 border border-primary/10 rounded-2xl p-8 md:p-10 max-w-2xl mx-auto text-center"
+            >
+              <Building2 className="w-10 h-10 text-primary mx-auto mb-4" />
+              <h2 className="text-2xl font-bold text-primary mb-2">AMEEB TRADING LLC</h2>
+              <p className="text-muted-foreground mb-4">Our UAE trading office for international operations</p>
+              <div className="space-y-2 text-foreground">
+                <p>Sukkon Business Center, 9-67</p>
+                <p>Al Garhoud, Dubai, UAE</p>
+                <p className="flex items-center justify-center gap-2 font-semibold mt-3">
+                  <Phone className="w-4 h-4 text-primary" />
+                  058 302 9107
+                </p>
+              </div>
+            </motion.div>
           </div>
         </section>
 

@@ -402,7 +402,7 @@ export function HomePage() {
               Contact Us Now
             </Link>
             <a 
-              href="mailto:info@dharejoagri.com" 
+              href="mailto:dharejoagri@gmail.com" 
               className="px-8 py-4 bg-white border border-border text-foreground font-bold rounded-lg hover:bg-muted transition-all"
             >
               Email Us

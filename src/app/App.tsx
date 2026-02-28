@@ -11,6 +11,7 @@ import { TermsPage } from './pages/TermsPage';
 import { PrivacyPage } from './pages/PrivacyPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { CattleFarmPage } from './pages/CattleFarmPage';
+import { GalleryPage } from './pages/GalleryPage';
 
 function ScrollToTopOnNavigate() {
   const { pathname } = useLocation();
@@ -33,6 +34,7 @@ export default function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/rhodes-grass" element={<RhodesPage />} />
             <Route path="/cattle-farm" element={<CattleFarmPage />} />
+            <Route path="/gallery" element={<GalleryPage />} />
             <Route path="/:productId" element={<CommodityPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/terms" element={<TermsPage />} />

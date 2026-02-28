@@ -82,6 +82,15 @@ export function Navigation() {
               CATTLE FARM
             </Link>
 
+            <Link
+              to="/gallery"
+              className={`px-4 py-2 text-sm font-semibold tracking-wide transition-colors ${
+                showScrolledStyle ? 'text-primary' : 'text-white'
+              } hover:text-accent`}
+            >
+              GALLERY
+            </Link>
+
             {/* Products Dropdown */}
             <div 
               className="relative group"
@@ -173,6 +182,14 @@ export function Navigation() {
                   className="text-base font-semibold text-white border-b border-white/10 pb-3"
                 >
                   Cattle Farm
+                </Link>
+
+                <Link
+                  to="/gallery"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-base font-semibold text-white border-b border-white/10 pb-3"
+                >
+                  Gallery
                 </Link>
 
                 <div className="py-2">

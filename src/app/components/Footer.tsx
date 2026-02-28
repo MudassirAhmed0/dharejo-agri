@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { MapPin, Mail, Facebook, Instagram } from 'lucide-react';
+import { MapPin, Mail, Facebook, Instagram, Phone } from 'lucide-react';
 import { motion } from 'motion/react';
 import logoWhite from '../../assets/logo-white.png';
 import { products } from '../data/products';
@@ -100,10 +100,22 @@ export function Footer() {
                   <p>Dates Farm</p>
                 </div>
               </li>
+              <li className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-accent shrink-0 mt-1" />
+                <div className="text-sm text-primary-foreground/80">
+                  <p className="font-semibold text-white">Dubai, UAE</p>
+                  <p>AMEEB TRADING LLC</p>
+                  <p>Sukkon Business Center, 9-67, Al Garhoud</p>
+                </div>
+              </li>
+              <li className="flex items-center gap-3">
+                <Phone className="w-5 h-5 text-accent shrink-0" />
+                <span className="text-sm text-primary-foreground/80">058 302 9107</span>
+              </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-accent shrink-0" />
-                <a href="mailto:info@dharejoagri.com" className="text-sm text-primary-foreground/80 hover:text-white break-all">
-                  info@dharejoagri.com
+                <a href="mailto:dharejoagri@gmail.com" className="text-sm text-primary-foreground/80 hover:text-white break-all">
+                  dharejoagri@gmail.com
                 </a>
               </li>
             </ul>
