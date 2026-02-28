@@ -5,34 +5,37 @@ import { MapPin, Mail, Clock, Send, Building2, Phone } from 'lucide-react';
 export function ContactPage() {
   const contactInfo = [
     {
-      icon: MapPin,
-      title: 'Farming Locations',
-      content: 'Sakrand & Saleh Pat',
-      description: 'Main production fields'
-    },
-    {
-      icon: MapPin,
-      title: 'Dates Farm',
-      content: 'Khairpur, Sindh',
-      description: 'Dedicated date cultivation'
-    },
-    {
-      icon: Building2,
-      title: 'UAE Office',
-      content: 'Sukkon Business Center, 9-67',
-      description: 'Al Garhoud, Dubai, UAE'
-    },
-    {
       icon: Mail,
       title: 'Email Us',
       content: 'dharejoagri@gmail.com',
       description: 'For bulk inquiries & export'
     },
     {
+      icon: Phone,
+      title: 'Phone',
+      content: '058 302 9107',
+      description: 'UAE office line'
+    },
+    {
       icon: Clock,
       title: 'Working Hours',
       content: 'Mon-Sat: 9:00 AM - 6:00 PM',
       description: 'Field operations active 24/7'
+    }
+  ];
+
+  const farmLocations = [
+    {
+      name: 'Sakrand',
+      description: 'Main Rhodes Grass production fields with modern irrigation infrastructure.'
+    },
+    {
+      name: 'Saleh Pat',
+      description: 'Expanded agricultural land utilizing crop rotation for Wheat and Mustard.'
+    },
+    {
+      name: 'Khairpur',
+      description: 'Dedicated Dates farm under structured supervision and care.'
     }
   ];
 
@@ -61,31 +64,6 @@ export function ContactPage() {
           </div>
         </section>
 
-        {/* Contact Info Cards */}
-        <section className="py-20 bg-background">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {contactInfo.map((info, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="bg-card rounded-xl p-10 shadow-sm border border-border hover:shadow-lg transition-all text-center"
-                >
-                  <div className="w-14 h-14 bg-primary/5 rounded-full flex items-center justify-center mb-6 mx-auto">
-                    <info.icon className="w-7 h-7 text-primary" />
-                  </div>
-                  <h3 className="text-lg font-bold mb-2 text-foreground">{info.title}</h3>
-                  <p className="text-xl font-bold text-primary mb-2 break-all">{info.content}</p>
-                  <p className="text-muted-foreground text-sm">{info.description}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* UAE Office Details */}
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -108,6 +86,62 @@ export function ContactPage() {
                 </p>
               </div>
             </motion.div>
+          </div>
+        </section>
+
+        {/* Contact Info Cards */}
+        <section className="py-20 bg-background">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {contactInfo.map((info, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="bg-card rounded-xl p-12 shadow-sm border border-border hover:shadow-lg transition-all text-center"
+                >
+                  <div className="w-14 h-14 bg-primary/5 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <info.icon className="w-7 h-7 text-primary" />
+                  </div>
+                  <h3 className="text-lg font-bold mb-2 text-foreground">{info.title}</h3>
+                  <p className="text-xl font-bold text-primary mb-2 break-all">{info.content}</p>
+                  <p className="text-muted-foreground text-sm">{info.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Farm Locations */}
+        <section className="py-16 bg-primary text-white">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="text-3xl font-bold text-center mb-10"
+            >
+              Our Farming Locations
+            </motion.h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {farmLocations.map((loc, index) => (
+                <motion.div
+                  key={loc.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="bg-white/10 backdrop-blur-sm rounded-xl p-8 text-center border border-white/10"
+                >
+                  <MapPin className="w-8 h-8 text-accent mx-auto mb-4" />
+                  <h3 className="text-xl font-bold mb-3">{loc.name}</h3>
+                  <p className="text-white/80 text-sm leading-relaxed">{loc.description}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
 
