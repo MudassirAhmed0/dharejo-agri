@@ -39,13 +39,16 @@ export function HomePage() {
 
       {/* HERO SECTION */}
       <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden bg-primary">
-        {/* Image Background */}
+        {/* Video Background */}
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-primary/60 z-10" />
-          <img
-            src="https://images.unsplash.com/photo-1595113316349-9fa4eb24f884?q=80&w=2000&auto=format&fit=crop"
-            alt=""
+          <video
+            src={cuttingVideo}
             className="w-full h-full object-cover opacity-60 grayscale mix-blend-overlay"
+            autoPlay
+            muted
+            loop
+            playsInline
           />
         </div>
 

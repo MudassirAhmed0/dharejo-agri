@@ -152,9 +152,9 @@ export const products: ProductData[] = [
     }
   },
   {
-    id: 'mango-orchids',
-    title: 'Mango Orchids',
-    link: '/mango-orchids',
+    id: 'mangoes-orchids',
+    title: 'Mangoes Orchids',
+    link: '/mangoes-orchids',
     description: 'Premium mango orchards managed with seasonal planning, quality variety selection, and dedicated orchard supervision across Sindh.',
     features: [
       'Seasonal Harvest',
@@ -162,11 +162,11 @@ export const products: ProductData[] = [
       'Orchard Management',
       'Fresh Supply'
     ],
-    thumbnail: 'https://plus.unsplash.com/premium_photo-1667223723273-7e6c5a871abc?w=600&auto=format&fit=crop&q=80',
+    thumbnail: 'https://images.pexels.com/photos/9219974/pexels-photo-9219974.jpeg',
     heroImage: 'https://images.unsplash.com/photo-1629358821360-500f89a5a907?w=1200&auto=format&fit=crop&q=80',
     galleryImages: [
       'https://images.unsplash.com/photo-1629358821360-500f89a5a907?w=800&auto=format&fit=crop&q=80',
-      'https://plus.unsplash.com/premium_photo-1667223723273-7e6c5a871abc?w=800&auto=format&fit=crop&q=80',
+      'https://images.pexels.com/photos/9219974/pexels-photo-9219974.jpeg',
       'https://images.unsplash.com/photo-1653856453410-44220fd90479?w=800&auto=format&fit=crop&q=80'
     ],
     detailedContent: {

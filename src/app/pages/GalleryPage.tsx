@@ -63,10 +63,10 @@ const galleryItems: GalleryItem[] = [
   { src: datesPrimary, type: 'image', label: 'Dates Farm', category: 'Dates' },
   { src: datesSecondary, type: 'image', label: 'Dates Harvest', category: 'Dates' },
 
-  // Mango Orchids
-  { src: 'https://plus.unsplash.com/premium_photo-1667223723273-7e6c5a871abc?w=800&auto=format&fit=crop&q=80', type: 'image', label: 'Mango Tree', category: 'Mango Orchids' },
-  { src: 'https://images.unsplash.com/photo-1629358821360-500f89a5a907?w=800&auto=format&fit=crop&q=80', type: 'image', label: 'Mango Orchard', category: 'Mango Orchids' },
-  { src: 'https://images.unsplash.com/photo-1653856453410-44220fd90479?w=800&auto=format&fit=crop&q=80', type: 'image', label: 'Mango Harvest', category: 'Mango Orchids' },
+  // Mangoes Orchids
+  { src: 'https://images.pexels.com/photos/9219974/pexels-photo-9219974.jpeg', type: 'image', label: 'Mango Tree', category: 'Mangoes Orchids' },
+  { src: 'https://images.unsplash.com/photo-1629358821360-500f89a5a907?w=800&auto=format&fit=crop&q=80', type: 'image', label: 'Mango Orchard', category: 'Mangoes Orchids' },
+  { src: 'https://images.unsplash.com/photo-1653856453410-44220fd90479?w=800&auto=format&fit=crop&q=80', type: 'image', label: 'Mango Harvest', category: 'Mangoes Orchids' },
 
   // Vegetables
   { src: vegetablesThumb, type: 'image', label: 'Seasonal Vegetables', category: 'Vegetables' },
@@ -215,7 +215,7 @@ export function GalleryPage() {
                 <img
                   src={lightbox.src}
                   alt={lightbox.label}
-                  className="w-full h-full object-contain rounded-lg"
+                  className="w-full max-h-[85vh] object-contain rounded-lg"
                 />
               ) : (
                 <video
